@@ -17,8 +17,9 @@ what to notice, pitch or verify before contacting that company.
 Do not use it for anything else. In particular:
 
 - **One company per call, one call per company.** If the user gives several companies, analyse at most three, one call
-  each, and ask before going further. Never loop over a list, a spreadsheet or search results. The endpoint is a free,
-  shared service with hourly limits.
+  each, and ask before going further. Never loop over a list, a spreadsheet or search results. Do not offer to work
+  through a longer list one by one either: say the tool researches one company at a time and ask which one, two or
+  three to start with. The endpoint is a free, shared service with hourly limits.
 - **No contact data.** Do not ask the tool for, and never invent, e-mail addresses, phone numbers or named people.
 - **No messages.** This plugin sends nothing. Do not send, schedule or draft-and-send outreach on the user's behalf
   with any tool as part of this skill. You may draft text for the user to review and send themselves, if they ask.
