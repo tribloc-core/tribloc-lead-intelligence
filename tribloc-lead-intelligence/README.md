@@ -107,6 +107,8 @@ Each run used a fresh, empty config directory (`CLAUDE_CONFIG_DIR` set to a new 
 | Local checkout, 0.2.0 (2026-11-03 15:05Z): marketplace add, `install tribloc-lead-intelligence@tribloc`, `plugin list` | all exit 0; enabled, version 0.2.0 |
 | `claude mcp list` (authless connect to the live endpoint), 0.2.0 | `plugin:tribloc-lead-intelligence:tribloc-lead-intelligence: https://li.tribloc.co.uk/mcp (HTTP) - ✔ Connected` |
 | `claude plugin uninstall …` then `marketplace remove`, 0.2.0 | both `✔`; afterwards `No plugins installed` and `No MCP servers configured` |
+| From GitHub, 0.2.0 (2026-11-03 15:08Z): `marketplace add tribloc-core/tribloc-lead-intelligence`, install, `mcp list`, uninstall, remove | all exit 0; version 0.2.0 enabled; `✔ Connected`; clean afterwards |
+| From GitHub in one step, 0.2.0: `claude plugin install tribloc-lead-intelligence --marketplace tribloc-core/tribloc-lead-intelligence` | exit 0; version 0.2.0 enabled |
 | Session-only load (`--plugin-dir`, `claude -p`), 0.1.0 (2026-11-02) | the plugin MCP server is `connected` and the tool is exposed under its full name |
 | **Model-driven tool call (skill → MCP tool → presented answer)** | **NOT VERIFIED.** The fresh config directory has no login, and the non-interactive run with the machine's login stopped at "Failed to authenticate: OAuth session expired and could not be refreshed". Credentials were not copied or refreshed by the agent. The tool call itself was proved directly over MCP |
 | Refusal of forbidden actions inside a Claude session | **NOT VERIFIED**, for the same reason. Structurally there is nothing to refuse with: no send, contact-lookup, hook or script component exists |
