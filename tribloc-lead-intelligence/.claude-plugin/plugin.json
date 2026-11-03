@@ -1,0 +1,14 @@
+{
+  "name": "tribloc-lead-intelligence",
+  "displayName": "Tribloc Lead Intelligence",
+  "version": "0.2.0",
+  "description": "Research one company from its public website before sales outreach: evidence-backed observations with source URLs, observed vs hypothesis opportunities, coverage and limitations. Uses the free public Tribloc Lead Intelligence MCP endpoint; no account, no API key.",
+  "author": {
+    "name": "Benjamin Zsigri",
+    "url": "https://tribloc.co.uk"
+  },
+  "homepage": "https://tribloc.co.uk/lead-intelligence",
+  "repository": "https://github.com/tribloc-core/tribloc-lead-intelligence",
+  "license": "MIT",
+  "keywords": ["sales", "prospect-research", "account-research", "mcp", "public-web"]
+}

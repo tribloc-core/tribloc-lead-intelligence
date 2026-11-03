@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tribloc-lead-intelligence": {
+      "type": "http",
+      "url": "https://li.tribloc.co.uk/mcp"
+    }
+  }
+}

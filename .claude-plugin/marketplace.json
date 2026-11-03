@@ -1,0 +1,14 @@
+{
+  "name": "tribloc",
+  "description": "Tribloc plugins for Claude Code.",
+  "owner": {
+    "name": "Benjamin Zsigri"
+  },
+  "plugins": [
+    {
+      "name": "tribloc-lead-intelligence",
+      "source": "./tribloc-lead-intelligence",
+      "description": "Research one company from its public website before sales outreach, with sources."
+    }
+  ]
+}
