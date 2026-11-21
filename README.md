@@ -17,7 +17,7 @@ claude plugin install tribloc-lead-intelligence@tribloc
 The plugin contains configuration and instructions only: no hooks, scripts or executables. What it sends, fetches and
 stores, what it does not do, and how to uninstall it are in the [plugin README](tribloc-lead-intelligence/README.md).
 
-Current plugin version: `0.2.1`. Changes are listed in [`CHANGELOG.md`](CHANGELOG.md).
+Current plugin version: `0.2.2`. Changes are listed in [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Development and tests
 

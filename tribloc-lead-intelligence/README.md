@@ -1,6 +1,6 @@
 # Tribloc Lead Intelligence for Claude Code
 
-Version **0.2.1**. Plugin name: `tribloc-lead-intelligence`. Not listed in any official plugin directory.
+Version **0.2.2**. Plugin name: `tribloc-lead-intelligence`. Not listed in any official plugin directory.
 
 Research one company from its public website before you contact it, without leaving Claude Code. The plugin connects
 Claude Code to the free public Tribloc Lead Intelligence MCP endpoint, `https://li.tribloc.co.uk/mcp`. You need no
@@ -124,6 +124,7 @@ install the plugin in a logged-in terminal, then:
 
 ## Version and licence
 
+- `0.2.2`: repository hardening only (tests, CI, contract and contributor docs); the plugin behaves exactly as 0.2.1.
 - `0.2.1`: the skill no longer offers to work through a longer list one by one.
 - `0.2.0`: renamed to `tribloc-lead-intelligence`, MIT licence, public GitHub marketplace `tribloc`.
 - `0.1.0`: first local test build (`tribloc-account-intelligence`).
