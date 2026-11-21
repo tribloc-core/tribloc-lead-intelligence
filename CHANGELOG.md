@@ -7,6 +7,8 @@ follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the plugin
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-11-21
+
 Repository hardening. The plugin's behaviour is unchanged: `.mcp.json`, the skill and the commands are untouched.
 
 ### Added
@@ -56,6 +58,7 @@ Repository hardening. The plugin's behaviour is unchanged: `.mcp.json`, the skil
   `tribloc-dev`). Claude Code treats a renamed plugin as a different plugin, so a 0.1.0 install has to be removed by
   hand.
 
-[Unreleased]: https://github.com/tribloc-core/tribloc-lead-intelligence/compare/0267003...HEAD
+[Unreleased]: https://github.com/tribloc-core/tribloc-lead-intelligence/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/tribloc-core/tribloc-lead-intelligence/compare/0267003...v0.2.2
 [0.2.1]: https://github.com/tribloc-core/tribloc-lead-intelligence/commit/026700348207804558b8f621b53aa28ee3be2943
 [0.2.0]: https://github.com/tribloc-core/tribloc-lead-intelligence/commit/b14701128cb65de627890f773aaa67b2083e10c8
