@@ -14,6 +14,8 @@ const ALLOWED_TOP = new Set([".claude-plugin", ".mcp.json", "LICENSE", "README.m
 const FORBIDDEN_DIRS = new Set(["hooks", "agents", "bin", "scripts", "node_modules", "dist", "lib", "src"]);
 const SCRIPT_EXT = /\.(?:sh|bash|zsh|fish|ps1|bat|cmd|exe|com|js|mjs|cjs|ts|mts|cts|jsx|tsx|py|rb|pl|php|lua|go|rs|jar|wasm|so|dylib|dll|bin|node)$/i;
 const ALLOWED_FILE = /(?:\.md|\.json|^LICENSE)$/;
+// The one binary file the plugin may hold: the directory listing icon (claude plugin validate, ICON_MISSING).
+const ICON_PATH = ".claude-plugin/icon.png";
 
 function walk(dir) {
   const out = [];
@@ -72,7 +74,7 @@ export function checkShape(entries, pluginDir) {
     if (!e.isDir) {
       if (e.mode & 0o111) errors.push(`${rel}: is executable`);
       if (SCRIPT_EXT.test(e.name)) errors.push(`${rel}: script or binary file type is not allowed`);
-      if (!ALLOWED_FILE.test(e.name)) errors.push(`${rel}: only Markdown, JSON and LICENSE files are allowed`);
+      if (!ALLOWED_FILE.test(e.name) && rel !== ICON_PATH) errors.push(`${rel}: only Markdown, JSON and LICENSE files are allowed`);
       if (/^hooks?\.json$/i.test(e.name)) errors.push(`${rel}: hook configuration is not allowed`);
     }
   }
@@ -124,6 +126,34 @@ test("negative: hooks, agents, scripts and executables are caught", () => {
   assert.ok(errors.some((e) => e.includes("hook configuration")), errors.join("\n"));
   assert.ok(errors.some((e) => e === "commands/run.sh: script or binary file type is not allowed"), errors.join("\n"));
   assert.ok(errors.some((e) => e === "commands/notes.md: is executable"), errors.join("\n"));
+});
+
+// Reads width and height from a PNG header (signature + IHDR), or returns null when it is not a PNG.
+export function pngSize(buf) {
+  const sig = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+  if (buf.length < 24 || !sig.every((b, i) => buf[i] === b) || buf.toString("ascii", 12, 16) !== "IHDR") return null;
+  return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+}
+
+test("the listing icon is a square PNG of 512 to 2048 px, under 2 MB", () => {
+  const buf = readFileSync(join(PLUGIN_DIR, ICON_PATH));
+  const size = pngSize(buf);
+  assert.ok(size, "icon.png is not a PNG");
+  assert.equal(size.width, size.height, "icon.png is not square");
+  assert.ok(size.width >= 512 && size.width <= 2048, `icon.png is ${size.width} px, outside 512-2048`);
+  assert.ok(buf.length < 2 * 1024 * 1024, "icon.png is 2 MB or larger");
+});
+
+test("negative: only the icon path may hold a PNG, and a non-PNG is not an icon", () => {
+  const dir = "/p";
+  const fake = [
+    { path: "/p/.claude-plugin/icon.png", name: "icon.png", isDir: false, mode: 0o100644 },
+    { path: "/p/commands/shot.png", name: "shot.png", isDir: false, mode: 0o100644 },
+  ];
+  const errors = checkShape(fake, dir);
+  assert.ok(!errors.some((e) => e.startsWith(".claude-plugin/icon.png")), errors.join("\n"));
+  assert.ok(errors.some((e) => e === "commands/shot.png: only Markdown, JSON and LICENSE files are allowed"), errors.join("\n"));
+  assert.equal(pngSize(Buffer.from("not a png at all, just text")), null);
 });
 
 test("negative: broken frontmatter is caught", () => {
