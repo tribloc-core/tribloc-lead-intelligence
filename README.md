@@ -17,5 +17,25 @@ claude plugin install tribloc-lead-intelligence@tribloc
 The plugin contains configuration and instructions only: no hooks, scripts or executables. What it sends, fetches and
 stores, what it does not do, and how to uninstall it are in the [plugin README](tribloc-lead-intelligence/README.md).
 
-Licence: MIT (see `LICENSE`). It covers the files in this repository, not the hosted endpoint at `li.tribloc.co.uk`,
-which Tribloc operates and may limit, change or stop.
+Current plugin version: `0.2.1`. Changes are listed in [`CHANGELOG.md`](CHANGELOG.md).
+
+## Development and tests
+
+The tests use Node.js 20 or newer and have no npm dependencies:
+
+```bash
+node --test tests/*.test.mjs
+```
+
+They check the manifests and that version, licence and repository agree across files, the `.mcp.json` server
+entry, the plugin's shape (configuration and instructions only), the documented MCP contract against a committed
+snapshot, and a mocked MCP handshake against a local server. No test contacts the hosted endpoint. CI runs the same
+tests on every push and pull request. How to report issues and propose changes: [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Security reports: [`SECURITY.md`](SECURITY.md).
+
+## Licence and boundary
+
+Licence: MIT (see `LICENSE`). The MIT licence covers the files in this repository. The hosted endpoint
+`https://li.tribloc.co.uk/mcp` that the plugin connects to is operated by Tribloc. It is not open source, its code is
+not in this repository, and it may be limited, changed or stopped at any time. Its interface, as listed on
+2026-11-21, is documented in [`tribloc-lead-intelligence/MCP-CONTRACT.md`](tribloc-lead-intelligence/MCP-CONTRACT.md).

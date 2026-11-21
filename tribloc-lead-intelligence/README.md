@@ -22,6 +22,7 @@ Zero opportunities is a normal result. One call takes up to about 45 seconds.
 | `skills/account-brief/SKILL.md` | When and how Claude uses the tool, and how it presents evidence, hypotheses, coverage and errors |
 | `commands/analyze.md` | `/tribloc-lead-intelligence:analyze <website> [country] [company name]` |
 | `commands/about.md` | `/tribloc-lead-intelligence:about`: what the plugin does and does not do, without a tool call |
+| `MCP-CONTRACT.md` | Documentation only: the interface of the hosted MCP tool, as listed on 2026-11-21 |
 | `LICENSE` | MIT |
 
 The plugin has no hooks, agents, scripts, executables or user configuration, and it runs nothing on your machine.
@@ -128,5 +129,25 @@ install the plugin in a logged-in terminal, then:
 - `0.1.0`: first local test build (`tribloc-account-intelligence`).
 - Increment `version` in `plugin.json` with every change you ship, because Claude Code keeps installed users on the
   pinned version until it changes.
+- Every release is also recorded in [`CHANGELOG.md`](../CHANGELOG.md) at the repository root, and the version must
+  match in `plugin.json`, the marketplace entry and both READMEs. The tests check this.
 - **Licence: MIT** (see `LICENSE`). It covers the files in this folder: the client configuration and instructions.
-  It does not cover the hosted endpoint at `li.tribloc.co.uk`, which Tribloc operates and may limit, change or stop.
+  It does not cover the hosted endpoint at `li.tribloc.co.uk`.
+
+## Boundary: plugin files and hosted service
+
+The MIT licence covers the files in this repository. The hosted endpoint `https://li.tribloc.co.uk/mcp` is operated
+by Tribloc. It is not open source, its code is not in this repository, and it may be limited, changed or stopped at
+any time. [`MCP-CONTRACT.md`](MCP-CONTRACT.md) documents its interface (tool name, input and output fields, limits
+and annotations) as listed on 2026-11-21, so that a compatible client or server can be built.
+
+## Development and tests
+
+From the repository root, with Node.js 20 or newer and no npm dependencies:
+
+```bash
+node --test tests/*.test.mjs
+```
+
+The tests read the repository files and a committed snapshot of the tool list; none of them contacts the hosted
+endpoint. See [`CONTRIBUTING.md`](../CONTRIBUTING.md) for what each test checks and the scope rules for changes.
