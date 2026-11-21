@@ -1,0 +1,24 @@
+{
+  "capabilities": {
+    "experimental": {},
+    "prompts": {
+      "listChanged": false
+    },
+    "resources": {
+      "listChanged": false,
+      "subscribe": false
+    },
+    "tools": {
+      "listChanged": false
+    }
+  },
+  "instructions": "Use analyze_business_sales_opportunities when a user wants to research one business from its public website before outreach. Present observations as evidence with their source URLs. Label every opportunity with is_hypothesis=true as an inference, not a fact. Treat missing signals as unknown. If coverage is partial or insufficient, say so and repeat the limitations. Never invent contacts, figures or claims. The tool handles one company per request.",
+  "protocolVersion": "2025-06-18",
+  "serverInfo": {
+    "description": "Evidence-backed public-web company research for sales preparation.",
+    "name": "tribloc-lead-intelligence",
+    "title": "Tribloc Lead Intelligence",
+    "version": "0.2.0",
+    "websiteUrl": "https://tribloc.co.uk/lead-intelligence?utm_source=tli-mcp&utm_medium=assistant&utm_campaign=one-company-brief&utm_content=server-info"
+  }
+}

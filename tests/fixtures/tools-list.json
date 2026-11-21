@@ -1,0 +1,334 @@
+{
+  "tools": [
+    {
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Analyse one public business website and return up to 5 evidence-backed observations, up to 3 sales opportunities (each marked observed or hypothesis), source URLs, a suggested outreach angle, confidence, coverage and limitations. Use this for prospect research before contacting a company. Public web sources only; takes up to about 45 seconds. It does not send messages, reveal private contact data, or access any internal sales system.",
+      "inputSchema": {
+        "properties": {
+          "website": {
+            "description": "Public company website or domain, for example example.com.",
+            "maxLength": 2048,
+            "minLength": 4,
+            "title": "Website",
+            "type": "string"
+          },
+          "company_name": {
+            "anyOf": [
+              {
+                "maxLength": 300,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Company name if known.",
+            "title": "Company Name"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "maxLength": 2,
+                "minLength": 2,
+                "pattern": "^[A-Za-z]{2}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "ISO 3166-1 alpha-2 country code if known, e.g. GB, CH, DE.",
+            "title": "Country"
+          },
+          "industry": {
+            "anyOf": [
+              {
+                "maxLength": 300,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Industry or niche if known.",
+            "title": "Industry"
+          }
+        },
+        "required": [
+          "website"
+        ],
+        "type": "object",
+        "title": "analyze_business_sales_opportunitiesArguments"
+      },
+      "name": "analyze_business_sales_opportunities",
+      "outputSchema": {
+        "properties": {
+          "product": {
+            "default": "Tribloc Lead Intelligence",
+            "title": "Product",
+            "type": "string"
+          },
+          "company": {
+            "$ref": "#/$defs/PublicCompany"
+          },
+          "coverage": {
+            "enum": [
+              "complete",
+              "partial",
+              "insufficient"
+            ],
+            "title": "Coverage",
+            "type": "string"
+          },
+          "observations": {
+            "items": {
+              "$ref": "#/$defs/PublicObservation"
+            },
+            "maxItems": 5,
+            "title": "Observations",
+            "type": "array"
+          },
+          "opportunities": {
+            "items": {
+              "$ref": "#/$defs/PublicOpportunity"
+            },
+            "maxItems": 3,
+            "title": "Opportunities",
+            "type": "array"
+          },
+          "suggested_outreach_angle": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Suggested Outreach Angle"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          },
+          "confidence_status": {
+            "const": "not validated",
+            "default": "not validated",
+            "title": "Confidence Status",
+            "type": "string"
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 4,
+            "title": "Limitations",
+            "type": "array"
+          },
+          "sources_not_checked": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 7,
+            "title": "Sources Not Checked",
+            "type": "array"
+          },
+          "preview_note": {
+            "default": "One company per request, public web sources only, no contact data.",
+            "title": "Preview Note",
+            "type": "string"
+          },
+          "learn_more_url": {
+            "default": "https://tribloc.co.uk/lead-intelligence?utm_source=tli-mcp&utm_medium=assistant&utm_campaign=one-company-brief&utm_content=result",
+            "title": "Learn More Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "company",
+          "coverage",
+          "confidence"
+        ],
+        "type": "object",
+        "$defs": {
+          "PublicCompany": {
+            "properties": {
+              "name": {
+                "title": "Name",
+                "type": "string"
+              },
+              "name_source": {
+                "default": "input",
+                "enum": [
+                  "input",
+                  "domain"
+                ],
+                "title": "Name Source",
+                "type": "string"
+              },
+              "domain": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Domain"
+              },
+              "country": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Country"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "title": "PublicCompany",
+            "type": "object"
+          },
+          "PublicEvidenceSource": {
+            "properties": {
+              "source_url": {
+                "title": "Source Url",
+                "type": "string"
+              },
+              "observed_at": {
+                "format": "date-time",
+                "title": "Observed At",
+                "type": "string"
+              },
+              "content_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "title": "Content Sha256",
+                "type": "string"
+              }
+            },
+            "required": [
+              "source_url",
+              "observed_at",
+              "content_sha256"
+            ],
+            "title": "PublicEvidenceSource",
+            "type": "object"
+          },
+          "PublicObservation": {
+            "properties": {
+              "statement": {
+                "title": "Statement",
+                "type": "string"
+              },
+              "confidence": {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "title": "Confidence",
+                "type": "number"
+              },
+              "confidence_status": {
+                "const": "not validated",
+                "default": "not validated",
+                "title": "Confidence Status",
+                "type": "string"
+              },
+              "source_urls": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 3,
+                "title": "Source Urls",
+                "type": "array"
+              },
+              "sources": {
+                "items": {
+                  "$ref": "#/$defs/PublicEvidenceSource"
+                },
+                "title": "Sources",
+                "type": "array"
+              }
+            },
+            "required": [
+              "statement",
+              "confidence"
+            ],
+            "title": "PublicObservation",
+            "type": "object"
+          },
+          "PublicOpportunity": {
+            "properties": {
+              "title": {
+                "title": "Title",
+                "type": "string"
+              },
+              "statement": {
+                "title": "Statement",
+                "type": "string"
+              },
+              "is_hypothesis": {
+                "title": "Is Hypothesis",
+                "type": "boolean"
+              },
+              "confidence": {
+                "maximum": 1.0,
+                "minimum": 0.0,
+                "title": "Confidence",
+                "type": "number"
+              },
+              "confidence_status": {
+                "const": "not validated",
+                "default": "not validated",
+                "title": "Confidence Status",
+                "type": "string"
+              },
+              "source_urls": {
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 3,
+                "title": "Source Urls",
+                "type": "array"
+              },
+              "sources": {
+                "items": {
+                  "$ref": "#/$defs/PublicEvidenceSource"
+                },
+                "title": "Sources",
+                "type": "array"
+              }
+            },
+            "required": [
+              "title",
+              "statement",
+              "is_hypothesis",
+              "confidence"
+            ],
+            "title": "PublicOpportunity",
+            "type": "object"
+          }
+        },
+        "title": "PublicAnalysisResult"
+      },
+      "title": "Analyse a business for sales opportunities"
+    }
+  ]
+}

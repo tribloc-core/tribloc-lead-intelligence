@@ -8,7 +8,10 @@
     {
       "name": "tribloc-lead-intelligence",
       "source": "./tribloc-lead-intelligence",
-      "description": "Research one company from its public website before sales outreach, with sources."
+      "description": "Research one company from its public website before sales outreach, with sources.",
+      "version": "0.2.1",
+      "license": "MIT",
+      "repository": "https://github.com/tribloc-core/tribloc-lead-intelligence"
     }
   ]
 }

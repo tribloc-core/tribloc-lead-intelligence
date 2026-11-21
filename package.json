@@ -1,0 +1,13 @@
+{
+  "name": "tribloc-lead-intelligence-marketplace",
+  "private": true,
+  "description": "Tests for the tribloc Claude Code marketplace. Not a published package; no dependencies.",
+  "license": "MIT",
+  "repository": "https://github.com/tribloc-core/tribloc-lead-intelligence",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  }
+}
