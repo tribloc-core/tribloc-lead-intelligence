@@ -1,6 +1,6 @@
 # Tribloc Lead Intelligence for Claude Code
 
-Version **0.2.2**. Plugin name: `tribloc-lead-intelligence`. Not listed in any official plugin directory.
+Version **0.2.3**. Plugin name: `tribloc-lead-intelligence`. Not listed in any official plugin directory.
 
 Research one company from its public website before you contact it, without leaving Claude Code. The plugin connects
 Claude Code to the free public Tribloc Lead Intelligence MCP endpoint, `https://li.tribloc.co.uk/mcp`. You need no
@@ -17,7 +17,8 @@ Zero opportunities is a normal result. One call takes up to about 45 seconds.
 
 | File | Purpose |
 |---|---|
-| `.claude-plugin/plugin.json` | Manifest: name, version, description, author, homepage, repository, licence |
+| `.claude-plugin/plugin.json` | Manifest: name, version, description, author, homepage, repository, licence, privacy policy URL |
+| `.claude-plugin/icon.png` | Listing icon, 1024 x 1024 PNG (the only non-text file) |
 | `.mcp.json` | One remote MCP server, `tribloc-lead-intelligence`, type `http`, URL `https://li.tribloc.co.uk/mcp`; no headers, no credentials |
 | `skills/account-brief/SKILL.md` | When and how Claude uses the tool, and how it presents evidence, hypotheses, coverage and errors |
 | `commands/analyze.md` | `/tribloc-lead-intelligence:analyze <website> [country] [company name]` |
@@ -124,6 +125,7 @@ install the plugin in a logged-in terminal, then:
 
 ## Version and licence
 
+- `0.2.3`: plugin icon and `privacyPolicyUrl` (https://tribloc.co.uk/privacy-notice) for the Claude directory checks; no behaviour change.
 - `0.2.2`: repository hardening only (tests, CI, contract and contributor docs); the plugin behaves exactly as 0.2.1.
 - `0.2.1`: the skill no longer offers to work through a longer list one by one.
 - `0.2.0`: renamed to `tribloc-lead-intelligence`, MIT licence, public GitHub marketplace `tribloc`.
